@@ -25,7 +25,7 @@ function mostrarPresupuesto() {
     return `Tu presupuesto actual es de ${presupuesto} €`;
 }
 
-function CrearGasto(descripcion, valor) {
+function CrearGasto(descripcion, valor, fecha, ...etiquetas) {
     // TODO
     this.descripcion = descripcion;
     if (typeof valor === "number" && valor > 0)
@@ -74,7 +74,7 @@ function CrearGasto(descripcion, valor) {
 
     for (let etiqueta of this.etiquetas)
     {
-        texto += ` - ${etiqueta}\n`;
+        texto += `- ${etiqueta}\n`;
     }
     return texto;
     }
@@ -103,6 +103,7 @@ function CrearGasto(descripcion, valor) {
     {
         this.etiquetas = this.etiquetas.filter(etiqueta => !etiquetasABorrar.includes(etiqueta));
     }
+    this.anyadirEtiquetas(...etiquetas);
 }
 
 function listarGastos(){
@@ -115,7 +116,7 @@ function anyadirGasto(gasto){
     gastos.push(gasto)
 }
 
-function borrarGasto(){
+function borrarGasto(id){
     let indice = gastos.findIndex(gasto => gasto.id === id);
     if (indice !== -1)
     {
