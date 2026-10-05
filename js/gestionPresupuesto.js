@@ -71,12 +71,21 @@ function CrearGasto(descripcion, valor) {
     let texto = `Gasto correspondiente a ${this.descripcion} con valor ${this.valor} €.\n`;
         texto += `Fecha: ${new Date(this.fecha).toLocaleString()}\n`;
         texto += "Etiquetas:\n";
-        
+
     for (let etiqueta of this.etiquetas)
     {
         texto += ` - ${etiqueta}\n`;
     }
     return texto;
+    }
+
+    this.actualizarFecha = function(nuevaFecha)
+    {
+        let timestamp = Date.parse(nuevaFecha);
+        if (!isNaN(timestamp))
+        {
+            this.fecha = timestamp;
+        }
     }
 }
 
