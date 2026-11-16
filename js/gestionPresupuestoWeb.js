@@ -44,33 +44,51 @@ function mostrarGastoWeb(idElemento, gasto) {
     contenedor.append(divGasto);
 }
 function mostrarGastosAgrupadosWeb(idElemento, agrup, periodo) {
-    const contenedor = document.getElementById(idElemento);
-    if (!contenedor) return;
-    
-    const nombrePeriodo = {mes : "mes", dia: "dia", año: "año"}
+    const elemento = document.getElementById(idElemento);
 
     const divAgrupacion = document.createElement('div');
-    divAgrupacion.classList.add('agrupacion');
-    document.body.append(divAgrupacion);
+    divAgrupacion.setAttribute('class', 'agrupacion');
+    elemento.append(divAgrupacion);
 
-    const h1Titulo = document.createElement('h1');
-    h1Titulo.textContent = 'Gastos agrupados por PERIODO';
-    divAgrupacion.append(h1Titulo);
+    let mensaje = ""
+    if (periodo === "dia")
+    {
+        mensaje = "Gastos agrupados por día";
+    }
+    else if (periodo === "anyo")
+    {
+        mensaje = "Gastos agrupados por año";
+    }
+    else
+    {
+        mensaje = "Gastos agrupados por mes";
+    }
 
-     for (const [clave, valor] of Object.entries(agrup)) {
+    const h1 = document.createElement('h1');
+    h1.textContent = mensaje;
+    divAgrupacion.append(h1);
 
+    for (let [clave, valor] of Object.entries(agrup))
+    {
         const divAgrupacionDato = document.createElement('div');
-        divAgrupacionDato.classList.add('Agrupacion-Dato');
+        divAgrupacionDato.setAttribute('class', 'agrupacion-dato');
         divAgrupacion.append(divAgrupacionDato);
 
-        const spanAgrupDatoClave = document.createElement('span');
-        spanAgrupDatoClave.classList.add('agrupacion-dato-clave');
-        spanAgrupDatoClave.textContent = clave;
-        spanAgrupDatoClave.append(divAgrupacionDato);
+        const spanAgrupacionClave = document.createElement('span');
+        spanAgrupacionClave.setAttribute('class', 'agrupacion-dato-clave')
+        spanAgrupacionClave.textContent = clave + ": ";
+        divAgrupacionDato.append(spanAgrupacionClave);
 
-        const spanAgrupDatoValor = document.createElement('span');
-        spanAgrupDatoValor.classList.add('agrupacion-dato-valor');
-        spanAgrupDatoValor.textContent = valor;
-        spanAgrupDatoValor.append(divAgrupacionDato);
-     }
+       
+        const spanAgrupacionValor = document.createElement('span');
+        spanAgrupacionValor.setAttribute('class', 'agrupacion-dato-valor')
+        spanAgrupacionValor.textContent = valor;
+        divAgrupacionDato.append(spanAgrupacionValor);
+    }
+}
+
+export{
+    mostrarDatoEnId,
+    mostrarGastosAgrupadosWeb,
+    mostrarGastoWeb
 }

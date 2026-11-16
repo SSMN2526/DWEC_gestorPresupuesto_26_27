@@ -1,5 +1,3 @@
-'use strict';
-
 import * as gp from "./gestionPresupuesto.js";
 import * as gpw from "./gestionPresupuestoWeb.js";
  
@@ -10,34 +8,34 @@ gpw.mostrarDatoEnId(
 );
 
 const gastos = [
-    gestionPresupuesto.crearGasto("Compra carne", 23.44, "2021-10-06", "casa", "comida"),
-    gestionPresupuesto.crearGasto("Compra fruta y verdura", 14.25, "2021-09-06", "supermercado", "comida"),
-    gestionPresupuesto.crearGasto("Bonobús", 18.60, "2020-05-26", "transporte"),
-    gestionPresupuesto.crearGasto("Gasolina", 60.42, "2021-10-08", "transporte", "gasolina"),
-    gestionPresupuesto.crearGasto("Seguro hogar", 206.45, "2021-09-26", "casa", "seguros"),
-    gestionPresupuesto.crearGasto("Seguro coche", 195.78, "2021-10-06", "transporte", "seguros")
+    new gp.CrearGasto("Compra carne", 23.44, "2021-10-06", "casa", "comida"),
+    new gp.CrearGasto("Compra fruta y verdura", 14.25, "2021-09-06", "supermercado", "comida"),
+    new gp.CrearGasto("Bonobús", 18.60, "2020-05-26", "transporte"),
+    new gp.CrearGasto("Gasolina", 60.42, "2021-10-08", "transporte", "gasolina"),
+    new gp.CrearGasto("Seguro hogar", 206.45, "2021-09-26", "casa", "seguros"),
+    new gp.CrearGasto("Seguro coche", 195.78, "2021-10-06", "transporte", "seguros")
 ];
  
 for (const gasto of gastos) {
-    gestionPresupuesto.anyadirGasto(gasto);
+    gp.anyadirGasto(gasto);
 }
 
-gestionPresupuestoWeb.mostrarDatoEnId(
+gpw.mostrarDatoEnId(
     "gastos-totales",
-    gestionPresupuesto.calcularTotalGastos()
+    gp.calcularTotalGastos()
 );
-gestionPresupuestoWeb.mostrarDatoEnId(
+gpw.mostrarDatoEnId(
     "balance-total",
-    gestionPresupuesto.calcularBalance()
+    gp.calcularBalance()
 );
 
-for (const gasto of gestionPresupuesto.listarGastos()) {
-    gestionPresupuestoWeb.mostrarGastoWeb("listado-gastos-completo", gasto);
+for (const gasto of gp.listarGastos()) {
+    gpw.mostrarGastoWeb("listado-gastos-completo", gasto);
 }
 
 function mostrarFiltrado(idElemento, filtro) {
-    for (const gasto of gestionPresupuesto.filtrarGastos(filtro)) {
-        gestionPresupuestoWeb.mostrarGastoWeb(idElemento, gasto);
+    for (const gasto of gp.filtrarGastos(filtro)) {
+        gpw.mostrarGastoWeb(idElemento, gasto);
     }
 }
 
@@ -58,18 +56,18 @@ mostrarFiltrado("listado-gastos-filtrado-4", {
     etiquetasTiene: ["comida", "transporte"]
 });
 
-gestionPresupuestoWeb.mostrarGastosAgrupadosWeb(
+gpw.mostrarGastosAgrupadosWeb(
     "agrupacion-dia",
-    gestionPresupuesto.agruparGastos("dia"),
+    gp.agruparGastos("dia"),
     "dia"
 );
-gestionPresupuestoWeb.mostrarGastosAgrupadosWeb(
+gpw.mostrarGastosAgrupadosWeb(
     "agrupacion-mes",
-    gestionPresupuesto.agruparGastos("mes"),
+    gp.agruparGastos("mes"),
     "mes"
 );
-gestionPresupuestoWeb.mostrarGastosAgrupadosWeb(
+gpw.mostrarGastosAgrupadosWeb(
     "agrupacion-anyo",
-    gestionPresupuesto.agruparGastos("anyo"),
+    gp.agruparGastos("anyo"),
     "anyo"
 );
